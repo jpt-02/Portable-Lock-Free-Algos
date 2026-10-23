@@ -14,22 +14,22 @@ static constexpr size_t kThreads = 2;
 //   data races, deadlocks, livelocks.
 struct Test01 : rl::test_suite<Test01, kThreads> {
     static constexpr size_t kLastNumber = 25;
-    TripleBuffer_Relacy<rl::var<int>> trio{};
+    TripleBuffer_Relacy<rl::var<int>> triple{};
 
     void thread(unsigned thread_index) {
         if (thread_index == 0) { // Producer
             // Writing 25 integers
             for (int i = 1; i <= kLastNumber; ++i) {
-                auto rlval = trio.Write()($);
+                auto rlval = triple.get_write()($);
                 rlval.store(i);
-                trio.Commit();
+                triple.commit_write();
             }
         } else { // Consumer
-            // Read until we get 25. If 25 is never read
+            // read until we get 25. If 25 is never read
             // relacy will report livelock.
             int prev_read = 0;
             while (prev_read != kLastNumber) {
-                auto& rlval = trio.Read();
+                auto& rlval = triple.read();
                 int val = rlval($);
                 // Check order: new value must be >= than the previous
                 // It will be > when it's new value, and will

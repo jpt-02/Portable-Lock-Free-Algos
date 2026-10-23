@@ -11,7 +11,7 @@ class TripleBuffer {
 public:
     TripleBuffer() = default;
 
-    T& Read() {
+    T& read() {
         /*
         Returns the reference (not the pointer) of an object of type T.
         */
@@ -24,14 +24,14 @@ public:
         return *front_buffer_ptr_; // dereference pointer using * and return, so it returns a reference to object T that the front buffer points to
     }
 
-    T& Write() {
+    T& get_write() {
         /*
         Returns the reference (not the pointer) of an object of type T.
         */
         return *back_buffer_ptr_;
     }
 
-    void Commit() {
+    void commit_write() {
         /*
         Commits any changes to the back buffer into the middle buffer
         */
