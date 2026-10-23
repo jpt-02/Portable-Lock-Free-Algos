@@ -43,4 +43,10 @@ VScode can truncate Relacy's output in the "Test Results" tab, so if you want to
 - **Relies on uintptr_t for the dirty bit logic**, which may not be available on some microcontrollers. Should be perfectly portable in any user-space application, though.
 - References: https://github.com/brilliantsugar/trio/tree/main
 
+| Methods | |
+| :--- | :--- |
+`read()` | Lock-free if atomics on host machine are lock-free <br> Wait-free if atomics on host machine are wait-free
+`get_write()` | Always lock-free <br> Always wait-free
+`commit_write()` | Lock-free if atomics on host machine are lock-free <br> Wait-free if atomics on host machine are wait-free
+
 More coming soon!
