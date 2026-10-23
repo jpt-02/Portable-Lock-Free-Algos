@@ -38,8 +38,6 @@ VScode can truncate Relacy's output in the "Test Results" tab, so if you want to
 - File: `01_triplebuffer.hpp`
 - Triple Buffer algorithm that uses a dirty bit to swap buffers.
 - SPSC (Single Producer, Single Consumer)
-- Lock-free as long as atomic operations on host machine are lock-free
-- Wait-free as long as atomic operations on host machine are wait-free
 - **Relies on uintptr_t for the dirty bit logic**, which may not be available on some microcontrollers. Should be perfectly portable in any user-space application, though.
 - References: https://github.com/brilliantsugar/trio/tree/main
 
