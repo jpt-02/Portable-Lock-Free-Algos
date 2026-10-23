@@ -7,7 +7,7 @@ otherwise just ignore this file.
 
 #include <iostream>
 #include <string>
-#include "hello.hpp"
+#include "00_hello.hpp"
 
 int main() {
     std::string result = get_hello();

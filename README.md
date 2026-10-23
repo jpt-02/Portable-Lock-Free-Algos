@@ -1,11 +1,11 @@
 # Portable-Lock-Free-Algos
-Portable, simple, copy+pastable lock-free algorithms written in C++.
+Portable, simple, copy+pastable lock-free algorithms written in C++. Algos are added here as I write them for other projects.
 
 ## How to Interact with this Repo
 
 The purpose of this repo is to be copy+pasted from. Each algorithm fits in a single file that uses only C++ standard library headers, so if you want to use one for your project, just take the file you want.
 
-Files are stored in `TODO: folder name`.
+Files are stored in the `algos` folder.
 
 ### Why do it this way?
 
@@ -23,10 +23,24 @@ Otherwise, you are definitely better off using a more popular library like Folly
 
 ## Testing
 
-Each algorithm is tested for race conditions using Relacy. The test files are in `TODO: folder`. 
+Each algorithm is tested for race conditions using Relacy. The test files are in `algos_relacy` folder. 
 
-> **Important Note:** LLMs are god awful at memory ordering. They will tell you that working code has race conditions, and that buggy code is perfectly fine. Lock-free programming is, in my experience, best done and tested by hand.
+> **Note:** LLMs are god awful at memory ordering. They will tell you that working code has race conditions, and that buggy code is perfectly fine. Lock-free programming is, in my experience, best done and tested by hand.
+
+### Saving Output
+
+VScode can truncate Relacy's output in the "Test Results" tab, so if you want to save it to a file just run `.\build\01_test.exe *> 01_output.txt`.
 
 ## List of Algos
 
-Coming soon!
+### 01 - TripleBuffer
+
+- File: `01_triplebuffer.hpp`
+- Triple Buffer algorithm that uses a dirty bit to swap buffers.
+- SPSC (Single Producer, Single Consumer)
+- Lock-free as long as atomic operations on host machine are lock-free
+- Wait-free as long as atomic operations on host machine are wait-free
+- **Relies on uintptr_t for the dirty bit logic**, which may not be available on some microcontrollers. Should be perfectly portable in any user-space application, though.
+- References: https://github.com/brilliantsugar/trio/tree/main
+
+More coming soon!
