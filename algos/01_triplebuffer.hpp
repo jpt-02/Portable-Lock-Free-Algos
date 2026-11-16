@@ -14,6 +14,7 @@ public:
     T& read() {
         /*
         Returns the reference (not the pointer) of an object of type T.
+        For best usage, use a reference (for example, int& result = triplebuffer.read())
         */
         uintptr_t possibly_dirty_ptr = middle_buffer_ptr_int_.load(std::memory_order_relaxed); //uintptr_t represents a pointer as an integer so we can manipulate its bits
         if ((possibly_dirty_ptr & dirty_bit) != 0) { // check if the lowest bit is set to 1 by using the AND operator. dirty_bit is all zeroes except for 1 in the rightmost place
