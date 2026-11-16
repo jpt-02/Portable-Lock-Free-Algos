@@ -19,17 +19,29 @@ You will likely find this repo useful if:
 - Whatever you are making needs to be as portable as possible
 - You are a moron (like me)
 
-Otherwise, you are definitely better off using a more popular library like Folly or Liburcu.
+Otherwise, you are definitely better off using a well-tested library like Folly or Liburcu.
 
 ## Testing
 
-Each algorithm is tested for race conditions using Relacy. The test files are in `algos_relacy` folder. 
+Each algorithm is tested for race conditions using Relacy. The test files are in `algos_relacy` folder, and CMake is configured to put the tests in VSCode's testing tab.
 
 > **Note:** LLMs are god awful at memory ordering. They will tell you that working code has race conditions, and that buggy code is perfectly fine. Lock-free programming is, in my experience, best done and tested by hand.
 
 ### Saving Output
 
-VScode can truncate Relacy's output in the "Test Results" tab, so if you want to save it to a file just run `.\build\01_test.exe *> 01_output.txt`.
+VScode can truncate Relacy's output in the "Test Results" tab, so if you want to save it to a file run something akin to `.\build\01_test.exe *> 01_output.txt`.
+
+## Benchmarking
+
+Each algorithm is set up to be benchmarked with Google Benchmark. Since this needs to be done in Release mode (instead of the default Debug mode), it is recommended that you use the command line instead of trying to wrangle CMake and VSCode into doing it for you.
+
+Here is an example of how to do that:
+```powershell
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --target 000_benchmark
+.\build\000_benchmark.exe
+```
+Simply replace the filename (`000_benchmark`, corresponding to `000_benchmark.cpp` in the `benchmarks` folder) with whichever benchmark you would like to run.
 
 ## List of Algos
 
@@ -48,3 +60,10 @@ VScode can truncate Relacy's output in the "Test Results" tab, so if you want to
 `commit_write()` | Lock-free if atomics on host machine are lock-free <br> Wait-free if atomics on host machine are wait-free
 
 More coming soon!
+
+## TODO
+
+- set up google benchmark
+- create mutex hpp file to compare against
+- add SPMC triple buffer
+- add header guards and make sure there are no linker errors from multiple uses (inline or constexpr)
