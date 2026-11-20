@@ -43,6 +43,8 @@ cmake --build build --target 000_benchmark
 ```
 Simply replace the filename (`000_benchmark`, corresponding to `000_benchmark.cpp` in the `benchmarks` folder) with whichever benchmark you would like to run.
 
+CMake is set up to generate an assembly file of each benchmark that can be manually reviewed to see if anything important is being optimized away. For `000_benchmark.cpp`, this file would be `build/CMakeFiles/benchmarkname.dir/benchmarks/benchmarkname.cpp.s`.
+
 ## List of Algos
 
 ### 01 - TripleBuffer
