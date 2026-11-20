@@ -55,6 +55,7 @@ foreach(BENCHMARK_SRC ${BENCHMARK_SOURCES})
     
     # generate intermediate assembly files (GCC only) - this is to inspect the assembly of your benchmarks 
     # to ensure nothing important is optimized away. Can be commented out.
+    # generated file is in build/CMakeFiles/benchmarkname.dir/benchmarks, looks like benchmarkname.cpp.s
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         target_compile_options(${BENCHMARK_NAME} PRIVATE -save-temps=obj)
     endif()
